@@ -23,7 +23,8 @@ class ScalableOCR extends StatefulWidget {
       this.paintboxCustom,
       this.cameraSelection = 0,
       this.torchOn,
-      this.lockCamera = true})
+      this.lockCamera = true,
+      this.showTextOverlay = true})
       : super(key: key);
 
   /// Offset on recalculated image left
@@ -58,6 +59,9 @@ class ScalableOCR extends StatefulWidget {
 
   /// Lock camera orientation
   final bool lockCamera;
+
+  /// Show text overlay
+  final bool showTextOverlay;
 
   @override
   ScalableOCRState createState() => ScalableOCRState();

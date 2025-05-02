@@ -14,7 +14,8 @@ class TextRecognizerPainter extends CustomPainter {
       this.boxRightOff = 4,
       this.boxTopOff = 2,
       this.getRawData,
-      this.paintboxCustom});
+      this.paintboxCustom,
+      this.showTextOverlay = true});
 
   /// ML kit recognizer
   final RecognizedText recognizedText;
@@ -51,6 +52,9 @@ class TextRecognizerPainter extends CustomPainter {
 
   /// Narower box paint
   final Paint? paintboxCustom;
+
+  /// Show text overlay
+  final bool showTextOverlay;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -121,24 +125,26 @@ class TextRecognizerPainter extends CustomPainter {
             var parsedText = textBlock.text;
             scannedText += " ${textBlock.text}";
 
-            final ParagraphBuilder builder = ParagraphBuilder(
-              ParagraphStyle(
-                  textAlign: TextAlign.left,
-                  fontSize: 14,
-                  textDirection: TextDirection.ltr),
-            );
-            builder.pushStyle(
-                ui.TextStyle(color: Colors.white, background: background));
-            builder.addText(parsedText);
-            builder.pop();
+            if (showTextOverlay) {
+              final ParagraphBuilder builder = ParagraphBuilder(
+                ParagraphStyle(
+                    textAlign: TextAlign.left,
+                    fontSize: 14,
+                    textDirection: TextDirection.ltr),
+              );
+              builder.pushStyle(
+                  ui.TextStyle(color: Colors.white, background: background));
+              builder.addText(parsedText);
+              builder.pop();
 
-            canvas.drawParagraph(
-              builder.build()
-                ..layout(ParagraphConstraints(
-                  width: right - left,
-                )),
-              Offset(left, top),
-            );
+              canvas.drawParagraph(
+                builder.build()
+                  ..layout(ParagraphConstraints(
+                    width: right - left,
+                  )),
+                Offset(left, top),
+              );
+            }
           }
         }
       }
