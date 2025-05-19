@@ -388,7 +388,8 @@ class ScalableOCRState extends State<ScalableOCR> {
           boxTopOff: widget.boxTopOff,
           boxRightOff: widget.boxRightOff,
           boxLeftOff: widget.boxRightOff,
-          paintboxCustom: widget.paintboxCustom);
+          paintboxCustom: widget.paintboxCustom,
+          showTextOverlay: widget.showTextOverlay);
 
       customPaint = CustomPaint(painter: painter);
     } else {
